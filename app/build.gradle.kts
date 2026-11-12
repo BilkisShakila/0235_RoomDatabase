@@ -1,22 +1,27 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    id("org.jetbrains.kotlin.plugin.compose")
+
+
 }
 
 android {
     namespace = "com.example.pertemuan9"
-    compileSdk {
-        version = release(37)
-    }
+    compileSdk = 37
+
 
     defaultConfig {
         applicationId = "com.example.pertemuan9"
-        minSdk = 24
-        targetSdk = 37
+        minSdk = 27
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -39,6 +44,16 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
+    //icons
+    implementation(libs.compose.icons)
+    //Room
+    implementation(libs.bundles.room)
+    ksp(libs.room.compiler)
+    //viewModels
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.runtime.compose)
+    //Navigation
+    implementation(libs.navigation.compose)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
